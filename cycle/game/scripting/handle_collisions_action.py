@@ -26,27 +26,32 @@ class HandleCollisionsAction(Action):
             script (Script): The script of Actions in the game.
         """
         if not self._is_game_over:
-            #self._handle_food_collision(cast)
+            self._handle_cycle_collision(cast)
             self._handle_segment_collision(cast)
             self._handle_game_over(cast)
 
-    def _handle_food_collision(self, cast):
-        """Updates the score nd moves the food if the cycle collides with the food.
+    def _handle_cycle_collision(self, cast):
+        """Ends the game if cycles collide.
         
         Args:
             cast (Cast): The cast of Actors in the game.
         """
-        score = cast.get_first_actor("scores")
-        food = cast.get_first_actor("foods")
-        cycle = cast.get_first_actor("cycles")
-        head = cycle.get_head()
+        cycle1 = cast.get_first_actor("cycles")
+        head = cycle1.get_segments()[0]
+        segments = cycle1.get_segments()[1:]
 
-        if head.get_position().equals(food.get_position()):
-            points = food.get_points()
-            cycle.grow_tail(points)
-            score.add_points(points)
-            food.reset()
-    
+        cycle2 = cast.get_second_actor("cycles")
+        head2 = cycle2.get_segments()[0]
+        segments2 = cycle2.get_segments()[1:]
+
+        for segment in segments:
+            if head2.get_position().equals(segment.get_position()):
+                self._is_game_over = True
+
+        for segment in segments2:
+            if head.get_position().equals(segment.get_position()):
+                self._is_game_over = True
+   
     def _handle_segment_collision(self, cast):
         """Sets the game over flag if the cycle collides with one of its segments.
         
@@ -81,7 +86,6 @@ class HandleCollisionsAction(Action):
 
             cycle2 = cast.get_second_actor("cycles")
             segments2 = cycle2.get_segments()
-            #food = cast.get_first_actor("foods")
 
             x = int(constants.MAX_X / 2)
             y = int(constants.MAX_Y / 2)
@@ -94,7 +98,14 @@ class HandleCollisionsAction(Action):
 
             for segment in segments1:
                 segment.set_color(constants.WHITE)
+                # Stop the trail from growing and the score from changing for cycle 1
+                #cycle1.grow_trail(0)
+                #score = cast.get_first_actor("scores")
+                #score.add_points(0)
 
             for segment in segments2:
                 segment.set_color(constants.WHITE)
-            #food.set_color(constants.WHITE)
+                # Stop the trail from growing and the score from changing for cycle 2
+                #cycle2.grow_trail(0)
+                #score = cast.get_first_actor("scores")
+                #score.add_points(0)

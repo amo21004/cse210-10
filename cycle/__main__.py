@@ -12,8 +12,8 @@ from game.scripting.draw_actors_action import DrawActorsAction
 from game.directing.director import Director
 from game.services.keyboard_service import KeyboardService
 from game.services.video_service import VideoService
-from game.shared.color import Color
-from game.shared.point import Point
+#from game.shared.color import Color
+#from game.shared.point import Point
 
 
 def main():
@@ -24,7 +24,7 @@ def main():
     cast.add_actor("cycles", Cycle(2))
     cast.add_actor("scores", Score(1))
     score_cycle_2 = Score(2)
-    score_cycle_2._position._x = 800
+    score_cycle_2._position._x = 835
     cast.add_actor("scores", score_cycle_2)
    
     # start the game

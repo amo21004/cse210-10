@@ -42,5 +42,5 @@ root                    (project root folder)
 ## Authors
 ---
 * Naif Amoodi: amo21004@byui.edu
-* Eduardo Sánchez: san21086@byui.edu
 * Shauntal Byrne: byr21002@byui.edu
+* Eduardo Sánchez: san21086@byui.edu

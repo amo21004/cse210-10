@@ -8,7 +8,6 @@ class MoveActorsAction(Action):
     than zero.
     """
 
-
     def execute(self, cast, script):
         """
         Executes the move actors action.

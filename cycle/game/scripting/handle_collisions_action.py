@@ -98,14 +98,6 @@ class HandleCollisionsAction(Action):
 
             for segment in segments1:
                 segment.set_color(constants.WHITE)
-                # Stop the trail from growing and the score from changing for cycle 1
-                #cycle1.grow_trail(0)
-                #score = cast.get_first_actor("scores")
-                #score.add_points(0)
 
             for segment in segments2:
                 segment.set_color(constants.WHITE)
-                # Stop the trail from growing and the score from changing for cycle 2
-                #cycle2.grow_trail(0)
-                #score = cast.get_first_actor("scores")
-                #score.add_points(0)

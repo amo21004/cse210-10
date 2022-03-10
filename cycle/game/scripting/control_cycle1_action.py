@@ -7,7 +7,8 @@ class ControlCycle1Action(Action):
     """
     An input action that controls the first cycle.
     
-    The responsibility of ControlCycle1Action is to get the direction and move the cycle's head.
+    The responsibility of ControlCycle1Action is to get the direction and move the cycle's head and to create and
+    make the cycle's trail grow then to add points as the trail grows.
 
     Attributes:
         _keyboard_service (KeyboardService): An instance of KeyboardService.
@@ -29,6 +30,11 @@ class ControlCycle1Action(Action):
             cast (Cast): The cast of Actors in the game.
             script (Script): The script of Actions in the game.
         """
+        collision = script.get_actions('update')[1]
+
+        if collision._is_game_over:
+            return
+
         # left
         if self._keyboard_service.is_key_down('a'):
             self._direction = Point(-constants.CELL_SIZE, 0)
@@ -49,6 +55,6 @@ class ControlCycle1Action(Action):
         cycle.turn_head(self._direction)
 
         if self._keyboard_service.is_key_down('a') or self._keyboard_service.is_key_down('d') or self._keyboard_service.is_key_down('w') or self._keyboard_service.is_key_down('s'):
-            cycle.grow_tail(1)
+            cycle.grow_trail(1)
             score = cast.get_first_actor("scores")
             score.add_points(1)

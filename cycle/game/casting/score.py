@@ -7,9 +7,13 @@ class Score(Actor):
     
     The responsibility of Score is to keep track of the points the player has earned by moving.
     It contains methods for adding and getting points. Client should use get_text() to get a string 
-    representation of the points earned. Points earned are lost by the player that has lost.
+    representation of the points earned.
+
+    Arg:
+        type (int): Number of scoreboard (1 or 2)
 
     Attributes:
+        _type (int): Associated with the argument to allow one scoreboard per player to be made.
         _points (int): The points earned in the game.
     """
     def __init__(self, type):

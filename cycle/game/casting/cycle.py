@@ -5,12 +5,16 @@ from game.shared.point import Point
 
 class Cycle(Actor):
     """
-    A long limbless reptile.
+    A long cycle that grows as it moves.
     
     The responsibility of Cycle is to move itself.
 
+    Arg:
+        type (int): Number of cycle (1 or 2)
+
     Attributes:
-        _points (int): The number of points the food is worth.
+        _segments (list): Trail of the cycle.
+        _type (int): Associated with the argument to allow more than one cycle to be made.
     """
     def __init__(self, type):
         super().__init__()
@@ -35,7 +39,7 @@ class Cycle(Actor):
     def get_head(self):
         return self._segments[0]
 
-    def grow_tail(self, number_of_segments):
+    def grow_trail(self, number_of_segments):
         for i in range(number_of_segments):
             tail = self._segments[-1]
             velocity = tail.get_velocity()
